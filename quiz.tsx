@@ -955,6 +955,8 @@ export default function TourDeFranceQuiz() {
       } else {
         setQuizCompleted(true)
         trackQuizStep('quiz_completed'); // Rastrear conclusão do quiz
+        // Scroll para o topo da página
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
       setIsSubmitting(false)
     }, 600)
@@ -971,6 +973,8 @@ export default function TourDeFranceQuiz() {
       } else {
         setQuizCompleted(true)
         trackQuizStep('quiz_completed'); // Rastrear conclusão do quiz
+        // Scroll para o topo da página
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
       setIsLoading(false)
     }, 400)
@@ -1097,6 +1101,8 @@ export default function TourDeFranceQuiz() {
   // Verificação de segurança para garantir que não renderize questões além da 4ª
   if (currentQuestion > 3) {
     setQuizCompleted(true);
+    // Scroll para o topo da página
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     return null;
   }
 
@@ -1213,7 +1219,13 @@ export default function TourDeFranceQuiz() {
                   >
                     <div 
                       className="h-full bg-[#ff0] transition-all duration-300 ease-out" 
-                      style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+                      style={{ width: `${
+                        currentQuestion === 0 ? '0' : 
+                        currentQuestion === 1 ? '25' :
+                        currentQuestion === 2 ? '50' :
+                        currentQuestion === 3 ? '75' :
+                        '100'
+                      }%` }}
                     />
                   </div>
                 </div>
