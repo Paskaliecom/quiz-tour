@@ -662,7 +662,7 @@ const HeaderCarousel = () => {
         
         {/* Mensagens do carrossel */}
         <div className="relative">
-          <div className="flex justify-center items-center min-h-[2rem] overflow-hidden">
+          <div className="flex justify-center items-center min-h-[3rem] overflow-hidden">
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -672,7 +672,7 @@ const HeaderCarousel = () => {
                     : "opacity-0 translate-y-8"
                 }`}
               >
-                <span className="text-gray-900 tracking-[0.45em] uppercase font-adidasFG text-sm">{message}</span>
+                <span className="text-gray-900 tracking-[0.45em] uppercase font-adidasFG text-sm leading-tight">{message}</span>
               </div>
             ))}
           </div>
@@ -949,7 +949,7 @@ export default function TourDeFranceQuiz() {
 
     // Avançar diretamente para a próxima pergunta ou finalizar o quiz
     setTimeout(() => {
-      if (currentQuestion < questions.length - 1) {
+      if (currentQuestion < 3) { // Garantir que não passe da 4ª questão (índice 3)
         setCurrentQuestion((prev) => prev + 1)
         setSelectedAnswer("")
       } else {
@@ -965,7 +965,7 @@ export default function TourDeFranceQuiz() {
     setIsLoading(true)
     
     setTimeout(() => {
-      if (currentQuestion < questions.length - 1) {
+      if (currentQuestion < 3) { // Garantir que não passe da 4ª questão (índice 3)
         setCurrentQuestion((prev) => prev + 1)
         setSelectedAnswer("")
       } else {
@@ -1094,6 +1094,12 @@ export default function TourDeFranceQuiz() {
     )
   }
 
+  // Verificação de segurança para garantir que não renderize questões além da 4ª
+  if (currentQuestion > 3) {
+    setQuizCompleted(true);
+    return null;
+  }
+
   return (
     <>
       <div className="min-h-screen bg-white flex flex-col">
@@ -1124,9 +1130,7 @@ export default function TourDeFranceQuiz() {
                 </div>
                 <div className="text-right">
                   <p className="text-sm text-gray-600">Votre réduction</p>
-                  <p className={`mr-10 text-2xl font-bold text-green-600 transform transition-all duration-500 ${
-                    correctAnswers > 0 ? 'scale-125 animate-pulse' : ''
-                  }`}>
+                  <p className="text-2xl font-bold text-green-600">
                     {correctAnswers * 25}€
                   </p>
                   <p className="text-xs text-gray-500">Récompense de participation</p>
@@ -1192,7 +1196,13 @@ export default function TourDeFranceQuiz() {
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-sm text-gray-600">Progression du quiz :</span>
-                    <span className="font-semibold">{currentQuestion + 1} / {questions.length}</span>
+                    <span className="font-semibold">
+                      {currentQuestion === 0 ? '0€/100€' : 
+                       currentQuestion === 1 ? '25€/100€' :
+                       currentQuestion === 2 ? '50€/100€' :
+                       currentQuestion === 3 ? '75€/100€' :
+                       '100€/100€'}
+                    </span>
                   </div>
                   <div 
                     aria-valuemax={questions.length} 
@@ -1220,7 +1230,7 @@ export default function TourDeFranceQuiz() {
 // Componente da barra de progresso da réduction
 const DiscountProgressBar = ({ correctAnswers }: { correctAnswers: number }) => {
   const discount = correctAnswers * 25;
-  const maxDiscount = 100;
+      const maxDiscount = 100;
   const progressPercentage = (discount / maxDiscount) * 100;
 
   return (

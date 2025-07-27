@@ -14,7 +14,6 @@ interface PriceItem {
 
 const bonusItems: PriceItem[] = [
   { id: 1, text: "Badge Officiel Édition Limitée", originalValue: "30€", currentValue: "0€", emoji: "🏆" },
-  { id: 2, text: "Nom + Numéro Personnalisé", originalValue: "30€", currentValue: "0€", emoji: "🇫🇷" },
   {
     id: 3,
     text: "Autographe Officiel du Vainqueur",
@@ -181,19 +180,7 @@ export default function PriceAnchoring({ correctAnswers }: PriceAnchoringProps) 
                 <span className="font-bold text-green-600 text-lg ml-2">0€</span>
               </div>
             </div>
-            <div className="flex items-center justify-between p-4 rounded-lg transition-all duration-500 opacity-100 transform translate-x-0 bg-white border border-yellow-200 shadow-sm">
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="h-5 w-5 text-green-500 animate-pulse" />
-                <div className="w-8 h-8 rounded overflow-hidden">
-                  <img alt="Maillot Tour de France" src={productImages[currentImageIndex].src} width={32} height={32} className="w-full h-full object-cover" />
-                </div>
-                <span className="font-medium text-gray-800">Nom + Numéro Personnalisé</span>
-              </div>
-              <div className="text-right">
-                <span className="font-bold text-gray-400 line-through text-sm">30€</span>
-                <span className="font-bold text-green-600 text-lg ml-2">0€</span>
-              </div>
-            </div>
+
             <div className="flex items-center justify-between p-4 rounded-lg transition-all duration-500 opacity-100 transform translate-x-0 bg-white border border-yellow-200 shadow-sm">
               <div className="flex items-center space-x-3">
                 <CheckCircle className="h-5 w-5 text-green-500 animate-pulse" />
